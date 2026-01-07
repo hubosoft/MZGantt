@@ -941,11 +941,11 @@ MZGantt provides rich interfaces to operate or control Gantt chart data and feat
 1. Standard JS Version
     Download Or use following CDN:
     ```
-    <script language="javascript" src="https://gcore.jsdelivr.net/npm/mzgantt@1.0.6/cdn/mzgantt.css"></script>
-    <script language="javascript" src="https://gcore.jsdelivr.net/npm/mzgantt@1.0.6/cdn/mzgantt.js"></script>
-    <script language="javascript" src="https://gcore.jsdelivr.net/npm/mzgantt@1.0.6/cdn/edit.js"></script>
-    <script language="javascript" src="https://gcore.jsdelivr.net/npm/mzgantt@1.0.6/cdn/export.js"></script>
-    <script language="javascript" src="https://gcore.jsdelivr.net/npm/mzgantt@1.0.6/cdn/mobile.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://gcore.jsdelivr.net/npm/mzgantt@1.0.7/cdn/mzgantt.css" />
+    <script language="javascript" src="https://gcore.jsdelivr.net/npm/mzgantt@1.0.7/cdn/mzgantt.js"></script>
+    <script language="javascript" src="https://gcore.jsdelivr.net/npm/mzgantt@1.0.7/cdn/edit.js"></script>
+    <script language="javascript" src="https://gcore.jsdelivr.net/npm/mzgantt@1.0.7/cdn/export.js"></script>
+    <script language="javascript" src="https://gcore.jsdelivr.net/npm/mzgantt@1.0.7/cdn/mobile.js"></script>
     ```
 
 2. npm Version (supports Vue, etc.): Install directly using npm command.

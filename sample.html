@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MZGantt Sample</title>
+    <meta name="viewport" content="width=device-width" />
+    <meta name="Keywords" content="MZGantt, Web Gantt, web Gantt chart, bar chart, Gantt chart, Gantt chart plugin, JS Gantt chart plugin, web Gantt chart plugin, drag-and-drop editing Gantt chart, npm installed Gantt chart plugin" />
+    <meta name="description" content="MZGantt is a pure JavaScript Gantt chart plugin. It supports Vue, TypeScript (TS), JavaScript (JS), and various popular frontend frameworks. It can be quickly integrated into your web application or mobile app.">
+    <meta name="author" content="ndes-global.com,tecjt.com" />
+
+    <!-- Import MZGantt CSS -->
+    <link rel="stylesheet" href="https://gcore.jsdelivr.net/npm/mzgantt@1.0.7/cdn/mzgantt.css">
+
+    <!-- Import MZGantt JS files -->
+    <script src="https://gcore.jsdelivr.net/npm/mzgantt@1.0.7/cdn/mzgantt.js"></script>
+    <script src="https://gcore.jsdelivr.net/npm/mzgantt@1.0.7/cdn/edit.js"></script>
+    <script src="https://gcore.jsdelivr.net/npm/mzgantt@1.0.7/cdn/export.js"></script>
+    <script src="https://gcore.jsdelivr.net/npm/mzgantt@1.0.7/cdn/mobile.js"></script>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+        }
+
+        .button-container {
+            margin-bottom: 15px;
+            padding: 10px;
+            background: white;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .scale-container {
+            padding: 10px;
+            margin-bottom: 15px;
+            background: white;
+            border: 1px solid #9E9E9E;
+            border-radius: 5px;
+            font-size: 12px;
+        }
+
+        .gantt-container {
+            width: 100%;
+            height: 600px;
+            background: white;
+            border-radius: 5px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        button, input[type="button"] {
+            margin: 2px;
+            padding: 5px 10px;
+            background: #2E9AFE;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+
+        button:hover, input[type="button"]:hover {
+            background: #1A8DFF;
+        }
+
+        label {
+            margin-right: 10px;
+            cursor: pointer;
+        }
+
+        input[type="radio"], input[type="checkbox"] {
+            margin-right: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Control buttons -->
+    <div class="button-container">
+        <button onclick="showData()">Get All Data</button>
+        <button onclick="alert(JSON.stringify(myGantt.getUpdatedRows()))">Get Changed Data</button>
+        <button onclick="alert(JSON.stringify(myGantt.getSelectedRows()))">Get Selected Data</button>
+
+        <button onclick="myGantt.showMileStone(true)">Show Milestone</button>
+        <button onclick="myGantt.showMileStone(false)">Hide Milestone</button>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <button onclick="myGantt.addRow('add')">Add</button>
+        <button onclick="myGantt.addRow('insert')">Insert</button>
+        <button onclick="myGantt.addRow('append')">Append</button>
+        <button onclick="myGantt.addRow('addChild')">Add Sub-task</button>
+        <button onclick="myGantt.deleteRows()">Delete</button>
+        <button onclick="myGantt.exportGanttImg()">Save as Image</button>
+    </div>
+
+    <!-- Time scale controls -->
+    <div class="scale-container">
+        Time Scale:
+        <input type="radio" name="radFormat" id="r_day" onclick='myGantt.changeFormat("day")' value="day" checked>
+        <label for="r_day">Week/Day</label>
+
+        <input type="radio" name="radFormat" id="r_week" onclick='myGantt.changeFormat("week")' value="week">
+        <label for="r_week">Year/Week</label>
+
+        <input type="radio" name="radFormat" id="r_month" onclick='myGantt.changeFormat("month")' value="month">
+        <label for="r_month">Year/Month</label>
+
+        <input type="radio" name="radFormat" id="r_quarter" onclick='myGantt.changeFormat("quarter")' value="quarter">
+        <label for="r_quarter">Year/Quarter</label>
+
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <input type="checkbox" id="_show_actual" onclick="showRslt()" checked>
+        <label for="_show_actual">Show Actual Progress</label>
+    </div>
+
+    <!-- Gantt chart container -->
+    <div id="GanttChartDIV" class="gantt-container"></div>
+
+    <script>
+        // Resource list
+        const resourceList = [
+            {value: "1", text: "Aaron Kwok"},
+            {value: "2", text: "Leon Lai"},
+            {value: "3", text: "Andy Lau"},
+            {value: "4", text: "Jacky Cheung"}
+        ];
+
+        // Gantt configuration
+        const ganttConfig = {
+            ganttStatus: "e",
+
+            // Column configuration
+            columnDefs: [
+                {name: 'seq', field: "seq"},
+                {name: 'checkbox', field: "checkbox"},
+                {name: 'name', field: "name", title: "Task Name", width: 150},
+                {name: 'resId', field: "resId", title: "Assignee", width: 50, options: resourceList, editable: true, multipleSelect: true},
+                {name: 'dur', field: "dur", title: "Duration", width: 60},
+                {name: 'planStart', field: "planStart", title: "Plan Start", width: 120, align: "left"},
+                {name: 'planEnd', field: "planEnd", title: "Plan Finish", width: 120},
+                {name: 'planDur', field: "planDur", title: "Plan Man-days", width: 60},
+                {name: 'rsltStart', field: "rsltStart", title: "Actual Start", width: 120},
+                {name: 'rsltEnd', field: "rsltEnd", title: "Actual Finish", width: 120},
+                {name: 'rsltDur', field: "rsltDur", title: "Actual Man-days", width: 60},
+                {name: 'pctComp', field: "pctComp", title: "Completion %", width: 60},
+                {name: "testCol1", field: "custColsVal", title: "Column 1", type: "TextBox", default: 10, width: 50, align: "left", visiable: true, editable: true},
+                {name: "testCol3", field: "custColsVal", title: "Column 3", width: 150, align: "left"}
+            ],
+
+            // Info box style
+            infoBoxStyle: "border: #cdcdcd 1px solid; background: #FFFFFF; box-shadow: 3px 3px 2px #CDCDCD; border-radius: 5px; padding: 5px;",
+
+            // Display controls
+            showTrack: 1,
+            showDuplicate: 0,
+            showMileStone: 1,
+            showDependencies: 1,
+            showDayDate: "date",
+            showWeekIndex: "",
+
+            // Data definitions
+            holidayList: ['2023-02-09', '2023-02-21', '2023-03-20'],
+            workdayList: ['2023-03-18'],
+            mileStoneLines: [
+                {date: '2023-07-05', name: 'startMS', title: 'Project Design Discussion', color: '#FF00BF', thickness: "2px"},
+                {date: '2023-07-16', name: 'pjMeeting', title: 'Code Review', color: '#088A29', thickness: "2px"},
+                {date: 'today', name: 'today', title: 'Today', color: '#FF0000', thickness: "2px"}
+            ],
+
+            // Plugin configuration
+            captionType: 'None',
+            captionPosition: 'Right',
+            dateFormat: 'yyyy-mm-dd',
+            weekStartDay: 0,
+            workingHourRange: ['1', '23'],
+            hourFormat: 0,
+            dragChgDur: "1",
+            autoCalDur: 1,
+            includeHoliday: "N",
+            includeToTime: "Y",
+            durPrecision: 2,
+            fixColsCnt: 4,
+            fixParent: 0,
+            idType: "Snow",
+
+            // Style controls
+            compBackground: '#00BAAD',
+            groupBackground: '#C0EBE8',
+            holidayBGColor: '#FAFAFA',
+            currentTimeBackColor: ['h', '#FF9797'],
+            intervalColor: ['#FFFFFF', '#F4F4F4'],
+            selectedRowColor: '#D8D8D8',
+            selectedCellColor: '#2E9AFE',
+            borderColor: '#CDCDCD',
+            barBorderRadius: 6,
+            barBorderWeight: 0,
+            barBorderColor: '#9E0000',
+            barOpacity: 1,
+            barGridBorderWeight: 1,
+            barHeightAdj: 2,
+            barDistanceAdj: -1,
+            dragHandlerBackColor: '#D8D8D8',
+            dependLineColor: '#00BAAD',
+            dependLineMouseOverColor: '#FE9A2E',
+            criticalPathBGColor: '#FE9A2E',
+            leftSideWidth: 300,
+            contentHeight: 500,
+            rowHeight: 35,
+            dayColWidth: 20,
+            monthColWidth: 70,
+            quarterColWidth: 100
+        };
+
+        // Sample task data
+        const taskData = [
+            {
+                id: 1,
+                seq: 1000,
+                name: "Unit A Construction Period 1",
+                rsltStart: "",
+                rsltEnd: "",
+                rsltDur: 1,
+                planBarColor: "#C0EBE8",
+                linkTo: "http://",
+                isMS: 0,
+                resId: "1",
+                pctComp: 0,
+                isGroup: 1,
+                parentId: "",
+                isExpand: 1,
+                preNodes: "",
+                caption: "Key Focus",
+                testCol1: "1",
+                testCol2: "01",
+                testCol3: "3",
+                plan: [{start: "2023-07-05", end: "2023-09-06", dur: 10}]
+            },
+            {
+                id: 11,
+                seq: 2000,
+                name: "Task Name wzf",
+                plan: [{start: "2023-07-05", end: "2023-07-06", dur: 10}],
+                rsltStart: "2023-07-14",
+                rsltEnd: "2023-07-15",
+                rsltDur: 1,
+                planBarColor: "#C0EBE8",
+                linkTo: "http://",
+                isMS: 0,
+                resId: "2",
+                pctComp: 40,
+                isGroup: 0,
+                parentId: 1,
+                isExpand: 1,
+                caption: "",
+                testCol1: "10",
+                testCol2: "02",
+                testCol3: "Sample content"
+            },
+            {
+                id: 12,
+                seq: 3000,
+                name: "Task Name 222222",
+                plan: [{start: "", end: ""}],
+                rsltStart: "2023-07-10",
+                rsltEnd: "2023-07-20",
+                rsltDur: 1,
+                planBarColor: "#C0EBE8",
+                linkTo: "http://",
+                isMS: "0",
+                resId: "2",
+                pctComp: 10,
+                isGroup: 0,
+                parentId: 1,
+                isExpand: 1,
+                preNodes: "",
+                caption: "Note 1",
+                testCol1: "aa",
+                testCol2: "00",
+                testCol3: "Sample content"
+            },
+            {
+                id: 2,
+                seq: 6000,
+                name: "Unit B Construction Period",
+                plan: [{}],
+                rsltStart: "",
+                rsltEnd: "",
+                rsltDur: 1,
+                planBarColor: "#C0EBE8",
+                linkTo: "http://",
+                isMS: 0,
+                resId: "1",
+                pctComp: 0,
+                isGroup: 1,
+                parentId: "",
+                isExpand: 1,
+                preNodes: [],
+                caption: ""
+            },
+            {
+                id: 22,
+                seq: 8000,
+                name: "Task Name b2",
+                plan: [{start: "2023-07-20", end: "2023-07-29"}],
+                rsltStart: "2023-07-30",
+                rsltEnd: "2023-08-02",
+                rsltDur: 1,
+                planBarColor: "#C0EBE8",
+                linkTo: "http://",
+                isMS: 0,
+                resId: "2",
+                pctComp: 0,
+                isGroup: 0,
+                parentId: 2,
+                isExpand: 1,
+                caption: ""
+            },
+            {
+                id: "B03",
+                seq: 9000,
+                name: "Task Name b3",
+                plan: [{start: "2023-08-02", end: "2023-08-10"}],
+                rsltStart: "2023-08-02",
+                rsltEnd: "2023-08-11",
+                rsltDur: 0,
+                planBarColor: "#C0EBE8",
+                linkTo: "http://",
+                isMS: 0,
+                resId: "2",
+                pctComp: 0,
+                isGroup: 0,
+                parentId: 2,
+                isExpand: 1,
+                preNodes: [],
+                caption: ""
+            },
+            {
+                id: "B31-01",
+                seq: 10000,
+                name: "B31-01",
+                plan: [{start: "2023-08-02", end: "2023-08-10"}],
+                rsltStart: "2023-08-02",
+                rsltEnd: "2023-08-11",
+                rsltDur: 0,
+                planBarColor: "#C0EBE8",
+                linkTo: "http://",
+                isMS: 0,
+                resId: "2",
+                pctComp: 0,
+                isGroup: 0,
+                parentId: "2",
+                isExpand: 1,
+                preNodes: [{id: 22, type: "FS", gapDays: 3}],
+                caption: ""
+            },
+            {
+                id: "B31-02",
+                seq: 11000,
+                name: "B31-02",
+                plan: [{start: "2023-08-11", end: "2023-08-16"}],
+                rsltStart: "2023-08-10",
+                rsltEnd: "2023-08-17",
+                rsltDur: 0,
+                planBarColor: "#C0EBE8",
+                linkTo: "http://",
+                isMS: 0,
+                resId: "2",
+                pctComp: 0,
+                isGroup: 0,
+                parentId: "2",
+                isExpand: 1,
+                preNodes: [{id: "B31-01", type: "FS", gapDays: 0}],
+                caption: ""
+            }
+        ];
+
+        // ================================ Gantt Chart Setup ====================================
+        // Initialize Gantt object
+        const myGantt = MZGantt.init();
+
+        // Start Gantt editor
+        MZGanttEditor.start(myGantt);
+
+		// Start Gantt Export
+        MZGanttExport.start(myGantt);
+
+        // Create and display Gantt chart
+        myGantt.createGantt("GanttChartDIV", "day");
+
+		// Set language to enlish
+		myGantt.setGanttLang("en");
+
+        // Configure Gantt with settings
+        myGantt.config(ganttConfig);
+
+        // Load task data
+        myGantt.bindGanttData(taskData);
+
+        // Draw Gantt chart
+        myGantt.drawGantt();
+
+        // ================================ Event Handlers ====================================
+
+        // Show actual progress toggle
+        function showRslt() {
+            const isChecked = document.getElementById("_show_actual").checked;
+            myGantt.switchTrack(isChecked);
+        }
+
+        // Display all data
+        function showData() {
+            const data = myGantt.getAllRows();
+            console.log("All Gantt Data:", data);
+            alert("Data logged to console. Check developer tools.");
+        }
+
+        // Event handlers setup
+        myGantt.on("cellRender", function(row, cellObj) {
+            const field = cellObj.field;
+
+            if (field === "pctComp") {
+                cellObj.cellHTML = `<div style="width:100%;background:#D8D8D8;border-radius:3px;">
+                                   <div style="border-radius:3px;background:#04B404;line-height:20px;width:${row.pctComp}%;">
+                                   ${row.pctComp}%</div></div>`;
+            }
+
+            return cellObj;
+        });
+
+        myGantt.on("rowRender", function(row, rowStyleObj) {
+            if (row.isGroup === 1) {
+                rowStyleObj.rowStyle = 'background:#BCF5A9;';
+            }
+            return rowStyleObj;
+        });
+
+        myGantt.on("clickBar", function(row, eventXY, dom) {
+            console.log(`Click: Task: ${row.name}, Date: ${eventXY.date}`);
+        });
+
+        myGantt.on("rightClick", function(row, eventXY, dom) {
+            console.log(`Right Click: Task: ${row.name}, Element ID: ${dom.id}, Date: ${eventXY.date}`);
+        });
+
+        myGantt.on("loaded", function(e, data) {
+            console.log("Gantt chart loaded successfully");
+        });
+
+        // Filter functions
+        function addFilter() {
+            myGantt.filterRows((task) => {
+                return task.plan[0]?.dur > 3;
+            }, "onlyShow");
+        }
+
+        function removeFilter() {
+            myGantt.removefilter();
+        }
+
+    </script>
+</body>
+</html>
