@@ -100,16 +100,16 @@
     <div class="scale-container">
         Time Scale:
         <input type="radio" name="radFormat" id="r_day" onclick='myGantt.changeFormat("day")' value="day" checked>
-        <label for="r_day">Week/Day</label>
+        <label for="r_day">Day</label>
 
         <input type="radio" name="radFormat" id="r_week" onclick='myGantt.changeFormat("week")' value="week">
-        <label for="r_week">Year/Week</label>
+        <label for="r_week">Week</label>
 
         <input type="radio" name="radFormat" id="r_month" onclick='myGantt.changeFormat("month")' value="month">
-        <label for="r_month">Year/Month</label>
+        <label for="r_month">Month</label>
 
         <input type="radio" name="radFormat" id="r_quarter" onclick='myGantt.changeFormat("quarter")' value="quarter">
-        <label for="r_quarter">Year/Quarter</label>
+        <label for="r_quarter">Quarter</label>
 
         &nbsp;&nbsp;&nbsp;&nbsp;
         <input type="checkbox" id="_show_actual" onclick="showRslt()" checked>
@@ -165,8 +165,8 @@
             holidayList: ['2023-02-09', '2023-02-21', '2023-03-20'],
             workdayList: ['2023-03-18'],
             mileStoneLines: [
-                {date: '2023-07-05', name: 'startMS', title: 'Project Design Discussion', color: '#FF00BF', thickness: "2px"},
-                {date: '2023-07-16', name: 'pjMeeting', title: 'Code Review', color: '#088A29', thickness: "2px"},
+                {date: '2023-07-09', name: 'startMS', title: 'Project Design Discussion', color: '#FF00BF', thickness: "2px"},
+                {date: '2023-08-01', name: 'pjMeeting', title: 'Code Review', color: '#088A29', thickness: "2px"},
                 {date: 'today', name: 'today', title: 'Today', color: '#FF0000', thickness: "2px"}
             ],
 
@@ -210,8 +210,8 @@
             contentHeight: 500,
             rowHeight: 35,
             dayColWidth: 20,
-            monthColWidth: 70,
-            quarterColWidth: 100
+            monthColWidth: 280,
+            quarterColWidth: 460
         };
 
         // Sample task data
@@ -241,7 +241,7 @@
             {
                 id: 11,
                 seq: 2000,
-                name: "Task Name wzf",
+                name: "Task Name 001",
                 plan: [{start: "2023-07-05", end: "2023-07-06", dur: 10}],
                 rsltStart: "2023-07-14",
                 rsltEnd: "2023-07-15",
@@ -262,7 +262,7 @@
             {
                 id: 12,
                 seq: 3000,
-                name: "Task Name 222222",
+                name: "Task Name 002",
                 plan: [{start: "", end: ""}],
                 rsltStart: "2023-07-10",
                 rsltEnd: "2023-07-20",
