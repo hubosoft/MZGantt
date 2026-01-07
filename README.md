@@ -145,21 +145,21 @@ MZGantt supports two usage methods: JS reference and npm installation.
 
         // Style control class===============================================================================
         // Background color settings
-        // planBackground: vPlanBackground,     // Set Gantt plan bar background
-        // resultBackground: vResultBackground, // Set Gantt actual bar background
+        // planBackground: vPlanBackground,       // Set Gantt plan bar background
+        // resultBackground: vResultBackground,   // Set Gantt actual bar background
         compBackground: '#0000FF',              // Set completion background
         // groupBackground: '#00FF00',          // Set parent task row background
         holidayBGColor: '#E6E6E6',              // Set rest day/holiday background
         currentTimeBackColor: ['h','#FF9797'],  // Set current time background (param1: h: show current time via header style; c: show current time via cell style. param2: color value)
-        intervalColor: ['#FFFFFF','#F4F4F4'],   // Set alternating row background color, default: #FFFFFF,#F4F4F4
-        selectedRowColor: '#CAE1FF',            // Set selected row background color, default: #CAE1FF
-        selectedCellColor: '#2E9AFE',			// Set selected cell border color, default: 2E9AFE
-        borderColor: '#9E9E9E',                 // Set Gantt border color, default: #9E9E9E
+        intervalColor: ['#FFFFFF','#F4F4F4'], // Set alternating row background color, default: #FFFFFF,#F4F4F4
+        selectedRowColor: '#CAE1FF',          // Set selected row background color, default: #CAE1FF
+        selectedCellColor: '#2E9AFE',         // Set selected cell border color, default: 2E9AFE
+        borderColor: '#9E9E9E',               // Set Gantt border color, default: #9E9E9E
 
         // Gantt bars
         barBorderRadius: 6,                     // Set Gantt bar border radius, default: 3px
         barBorderWeight: 1,                     // Set Gantt bar border weight, default: 1px
-        barBorderColor: '#9E0000',              // Set Gantt bar border color, default: #9E9E9E
+        barBorderColor: '#9E0000',            // Set Gantt bar border color, default: #9E9E9E
         barOpacity: 1,                          // Set Gantt bar opacity, default: 0.7
         barGridBorderWeight: 1,                 // Set Gantt bar background border weight, default: 1px
         resultBarStyle: 'mark',                 // Actual bar style (normal: do not mark dates outside plan, mark: mark dates outside plan; cust: custom segments)
@@ -170,12 +170,12 @@ MZGantt supports two usage methods: JS reference and npm installation.
 	    barDistanceAdj: 0,						// Distance adjustment between plan and actual progress bars (default 0px, no adjustment; larger value = closer. Can be negative)
 
         // Drag handle
-        dragHandlerBackColor: '#D8D8D8',		// Drag handle background color
+        dragHandlerBackColor: '#D8D8D8',      // Drag handle background color
 
         // lineExpandLen: 0,                    // Dependency line extension parameter
-        dependLineColor: '#228B22',             // Connection line color
-        dependLineMouseOverColor: '#FE9A2E',    // Connection line mouse hover color
-        criticalPathBGColor: '#FE9A2E',         // Critical path marker color
+        dependLineColor: '#228B22',           // Connection line color
+        dependLineMouseOverColor: '#FE9A2E',  // Connection line mouse hover color
+        criticalPathBGColor: '#FE9A2E',       // Critical path marker color
 
         // Width and height settings
         leftSideWidth: 300,                     // Set left panel width, default: 300px
@@ -204,26 +204,26 @@ MZGantt supports two usage methods: JS reference and npm installation.
     /*
       Gantt chart data object item description:
       I: Built-in fixed data items, cannot customize other names
-        1. id                  // (Required) String        Node ID (any string or number, must be unique)
-        2. plan                // (Optional) Array         Plan data
+        1. id                  // (Required) String          Node ID (any string or number, must be unique)
+        2. plan                // (Optional) Array           Plan data
         3. isExpand            // (Optional) Number(0 or 1)  Whether to expand display 1: expand/0: collapse
         4. isGroup             // (Optional) Number(0 or 1)  Whether to set as parent (group) 1: group/0: leaf node
-        5. preNodes            // (Optional) String|Array   Predecessor nodes, use comma to separate multiple predecessor nodes
-        6. parentId            // (Optional) String         Parent node ID (when current row is top-level node, this value must be set to empty "")
+        5. preNodes            // (Optional) String|Array    Predecessor nodes, use comma to separate multiple predecessor nodes
+        6. parentId            // (Optional) String          Parent node ID (when current row is top-level node, this value must be set to empty "")
         7. isMS                // (Optional) Number(0 or 1)  Whether milestone
-        8. caption             // (Optional) String         Title
-        9. planBarColor        // (Optional) String         Gantt plan background (color value)
+        8. caption             // (Optional) String          Title
+        9. planBarColor        // (Optional) String          Gantt plan background (color value)
 
       II: The following data items can use custom names and must match the name in column definitions
-        10. name               // (Required) String         Name (can be task name, resource name, etc.)
+        10. name               // (Required) String        Name (can be task name, resource name, etc.)
         11. iconColsVal        // (Optional) Array         Icon column (can be multiple icons separated by comma)
         12. rsltStart          // (Optional) String Date   Actual start
         13. rsltEnd            // (Optional) String Date   Actual end
         14. rsltDur            // (Optional) Number        Actual workdays
-        15. resId              // (Optional) String         Resource/Responsible person
+        15. resId              // (Optional) String        Resource/Responsible person
         16. pctComp            // (Optional) Number        Completion (0 ~ 100 percentage)
-        17. seq                // (Optional) Decimal      Sort number
-        18. yourColName        // (Optional) String         Custom column value, key needs to match custom column name
+        17. seq                // (Optional) Decimal       Sort number
+        18. yourColName        // (Optional) String        Custom column value, key needs to match custom column name
     */
 
     // Gantt chart data
@@ -680,20 +680,20 @@ custRsltBars|(Optional) Array|Segmented progress bar (name, title, start, end, h
 // Step 1: Use modal, construct the following data when modal is confirmed
 var task = {};
 
-task.name = "Test Task 1";                                               // (Required) Task name
+task.name = "Test Task 1";                                            // (Required) Task name
 task.isGroup = 0;                                                     // (Optional) Whether parent task (group)
 task.iconColsVal = [{"src": "./images/test.jpg","title": "",}];       // (Optional) Icon column value
 task.resId = "01";                                                    // (Optional) Responsible person ID
-task.resName = "Andy Lau";                                              // (Optional) Responsible person name (optional)
+task.resName = "Andy Lau";                                            // (Optional) Responsible person name (optional)
 task.plan = [{"start": "2023-12-20","end": "2023-12-25","dur": 5}];   // (Optional) Plan data
-task.planBarColor = "#FF0000";                                        // (Optional) Progress bar color
+task.planBarColor = "#FF0000";                                      // (Optional) Progress bar color
 task.rsltStart = "2023-12-20";                                        // (Optional) Actual start
 task.rsltEnd = "2023-12-26";                                          // (Optional) Actual end
 task.pctComp = 90;                                                    // (Optional) Completion percentage
 task.rsltDur = 6;                                                     // (Optional) Completion amount
 task.preNodes = [{"id":13,"type":"FS","gapDays":1}];                  // (Optional) Predecessor tasks (can be multiple)
 task.parentId = "";                                                   // (Optional when saveType is add/append/insert; required when addChild) Parent task
-task.caption = "Test Task 1";                                            // (Optional) Task title
+task.caption = "Test Task 1";                                         // (Optional) Task title
 task.isMS = 0;                                                        // (Optional) Whether milestone task
 
 // Step 2: Update task row data
@@ -939,13 +939,14 @@ MZGantt provides rich interfaces to operate or control Gantt chart data and feat
 
 ## VIII. Download
 1. Standard JS Version
-    Download: <a href="https://gitee.com/tecjt_home/mzgantt_js">MZGantt Gantt Chart Plugin (Standard JS Version)</a>
-    Or use CDN:
-        <script language="javascript" src="https://gcore.jsdelivr.net/npm/mzgantt@1.0.6/cdn/mzgantt.css"></script>
-        <script language="javascript" src="https://gcore.jsdelivr.net/npm/mzgantt@1.0.6/cdn/mzgantt.js"></script>
-        <script language="javascript" src="https://gcore.jsdelivr.net/npm/mzgantt@1.0.6/cdn/edit.js"></script>
-        <script language="javascript" src="https://gcore.jsdelivr.net/npm/mzgantt@1.0.6/cdn/export.js"></script>
-        <script language="javascript" src="https://gcore.jsdelivr.net/npm/mzgantt@1.0.6/cdn/mobile.js"></script>
+    Download Or use following CDN:
+    ```
+    <script language="javascript" src="https://gcore.jsdelivr.net/npm/mzgantt@1.0.6/cdn/mzgantt.css"></script>
+    <script language="javascript" src="https://gcore.jsdelivr.net/npm/mzgantt@1.0.6/cdn/mzgantt.js"></script>
+    <script language="javascript" src="https://gcore.jsdelivr.net/npm/mzgantt@1.0.6/cdn/edit.js"></script>
+    <script language="javascript" src="https://gcore.jsdelivr.net/npm/mzgantt@1.0.6/cdn/export.js"></script>
+    <script language="javascript" src="https://gcore.jsdelivr.net/npm/mzgantt@1.0.6/cdn/mobile.js"></script>
+    ```
 
 2. npm Version (supports Vue, etc.): Install directly using npm command.
     > npm install mzgantt
@@ -967,6 +968,6 @@ MZGantt provides 3 versions to meet different user needs.
 
 Mobile: +31(0)623010866
 Email:
-    Service1: info@ndes-global.com
-    Service2: info@tecjt.com
-    Service3: hubosoft@foxmail.com
+- Service 1: info@ndes-global.com
+- Service 2: info@tecjt.com
+- Service 3: hubosoft@foxmail.com
