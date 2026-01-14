@@ -967,6 +967,7 @@ MZGantt provides 3 versions to meet different user needs.
 ## X. Contact
 
 Mobile: +31(0)623010866
+
 Email:
 - Service 1: info@ndes-global.com
 - Service 2: info@tecjt.com
