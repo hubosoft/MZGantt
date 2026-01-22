@@ -74,7 +74,7 @@ MZGantt supports two usage methods: JS reference and npm installation.
         ganttStatus: "e",                       // Set Gantt chart status (e: edit plan, r: read-only)
 
         // Column configuration (left table column display configuration, not Gantt data format)
-        columnDefs: [
+        columns: [
             {name: 'seq',         field: "seq",        type:"level"},
             {name: 'checkbox',    field: "checkbox"},
             {name: 'iconColsVal', field: "iconColsVal", width: 30},
@@ -181,11 +181,6 @@ MZGantt supports two usage methods: JS reference and npm installation.
         leftSideWidth: 300,                     // Set left panel width, default: 300px
         contentHeight: 360,                     // Set Gantt chart height (excluding header), default: 300px. If adjustGanttHeight function is called on page for auto-height, this parameter can be omitted
         rowHeight: 35,                          // Set row height, default: 35px
-
-        // Left column width settings, can be deprecated after columnDefs is complete
-        iconColWidth: 30,                       // Set icon column width, default: 60px
-        nameColWidth: 150,                      // Set task/resource column width, default: 150px
-        dateColWidth: 120,                      // Set date column width, default: 80px
 
         // Right grid width settings (for different time scales)
         hourColWidth: 20,                       // Hour scale
@@ -897,13 +892,13 @@ MZGantt provides rich interfaces to operate or control Gantt chart data and feat
 6. Filter
     |<div style="width:170px">Method</div>| <div style="width:592px">Description</div>
     |----| ----|
-    addFilter|Set conditions to filter data. Example:<br>` MZGantt.filterRows((task) =>{return task.duration > 3;},"onlyShow")`
-    removefilter|Remove filter, restore data display. Example:<br>`MZGantt.removefilter()`
+    |addFilter|Set conditions to filter data. Example:<br>` MZGantt.filterRows((task) =>{return task.duration > 3;},"onlyShow")`
+    |removefilter|Remove filter, restore data display. Example:<br>`MZGantt.removefilter()`
 
 7. Export Image
     |<div style="width:170px">Method</div>| <div style="width:190px">Description</div>| <div style="width:375px">Parameters</div>
     |----| ----|----|
-    exportGanttImg |Save as image| None
+    |exportGanttImg |Save as image|Parameter 1: title height(titleHeight) <br > Parameter 2: title string(titleStr)
 
 8. Event Listeners
     |<div style="width:230px">Event Name</div>| <div style="width:560px">Description</div>|
@@ -941,11 +936,11 @@ MZGantt provides rich interfaces to operate or control Gantt chart data and feat
 1. Standard JS Version
     Download Or use following CDN:
     ```
-    <link rel="stylesheet" type="text/css" href="https://gcore.jsdelivr.net/npm/mzgantt@1.0.7/cdn/mzgantt.css" />
-    <script language="javascript" src="https://gcore.jsdelivr.net/npm/mzgantt@1.0.7/cdn/mzgantt.js"></script>
-    <script language="javascript" src="https://gcore.jsdelivr.net/npm/mzgantt@1.0.7/cdn/edit.js"></script>
-    <script language="javascript" src="https://gcore.jsdelivr.net/npm/mzgantt@1.0.7/cdn/export.js"></script>
-    <script language="javascript" src="https://gcore.jsdelivr.net/npm/mzgantt@1.0.7/cdn/mobile.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://gcore.jsdelivr.net/npm/mzgantt@1.0.8/cdn/mzgantt.css" />
+    <script language="javascript" src="https://gcore.jsdelivr.net/npm/mzgantt@1.0.8/cdn/mzgantt.js"></script>
+    <script language="javascript" src="https://gcore.jsdelivr.net/npm/mzgantt@1.0.8/cdn/edit.js"></script>
+    <script language="javascript" src="https://gcore.jsdelivr.net/npm/mzgantt@1.0.8/cdn/export.js"></script>
+    <script language="javascript" src="https://gcore.jsdelivr.net/npm/mzgantt@1.0.8/cdn/mobile.js"></script>
     ```
 
 2. npm Version (supports Vue, etc.): Install directly using npm command.
