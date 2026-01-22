@@ -80,17 +80,17 @@ MZGantt supports two usage methods: JS reference and npm installation.
             {name: 'iconColsVal', field: "iconColsVal", width: 30},
 
             // For the following fields, name can be customized and must match corresponding item names in data. field values are built-in fixed values, cannot be reset, and do not support type setting.
-            {name: 'name',        field: "name",       title: "Task Name", width: 150},
-            {name: 'resId',       field: "resId",      title: "Responsible Person",   width: 50,    options: resourceList},
-            {name: 'dur',         field: "dur",        title: "Duration",     width: 60},
-            {name: 'planStart',   field: "planStart",  title: "Plan Start", width: 120,   editable: false},
-            {name: 'planEnd',     field: "planEnd",    title: "Plan End", width: 120,   colCallBack:custCallbackFunc1},
-            {name: 'planDur',     field: "planDur",    title: "Plan Days", width: 60},
-            {name: 'rsltStart',   field: "rsltStart",  title: "Actual Start", width: 120},
-            {name: 'rsltEnd',     field: "rsltEnd",    title: "Actual End", width: 120},
-            {name: 'rsltDur',     field: "rsltDur",    title: "Actual Days", width: 60},
-            {name: 'pctComp',     field: "pctComp",    title: "Completion",   width: 60},
-            // {name: 'caption',     field: "caption",    title: "Label Text"},
+            {name: 'name',        field: "name",       title: "Task Name",          width: 150},
+            {name: 'resId',       field: "resId",      title: "Responsible Person", width: 50,    options: resourceList},
+            {name: 'dur',         field: "dur",        title: "Duration",           width: 60},
+            {name: 'planStart',   field: "planStart",  title: "Plan Start",         width: 120,   editable: false},
+            {name: 'planEnd',     field: "planEnd",    title: "Plan End",           width: 120,   colCallBack:custCallbackFunc1},
+            {name: 'planDur',     field: "planDur",    title: "Plan Days",          width: 60},
+            {name: 'rsltStart',   field: "rsltStart",  title: "Actual Start",       width: 120},
+            {name: 'rsltEnd',     field: "rsltEnd",    title: "Actual End",         width: 120},
+            {name: 'rsltDur',     field: "rsltDur",    title: "Actual Days",        width: 60},
+            {name: 'pctComp',     field: "pctComp",    title: "Completion",         width: 60},
+            // {name: 'caption',  field: "caption",    title: "Label Text"},
 
             // Custom columns (field: "custCol"): supports type setting: DropDownList/TextBox
             // Attribute altText: custom column replacement display text
@@ -145,21 +145,21 @@ MZGantt supports two usage methods: JS reference and npm installation.
 
         // Style control class===============================================================================
         // Background color settings
-        // planBackground: vPlanBackground,       // Set Gantt plan bar background
-        // resultBackground: vResultBackground,   // Set Gantt actual bar background
+        // planBackground: vPlanBackground,     // Set Gantt plan bar background
+        // resultBackground: vResultBackground, // Set Gantt actual bar background
         compBackground: '#0000FF',              // Set completion background
         // groupBackground: '#00FF00',          // Set parent task row background
         holidayBGColor: '#E6E6E6',              // Set rest day/holiday background
         currentTimeBackColor: ['h','#FF9797'],  // Set current time background (param1: h: show current time via header style; c: show current time via cell style. param2: color value)
-        intervalColor: ['#FFFFFF','#F4F4F4'], // Set alternating row background color, default: #FFFFFF,#F4F4F4
-        selectedRowColor: '#CAE1FF',          // Set selected row background color, default: #CAE1FF
-        selectedCellColor: '#2E9AFE',         // Set selected cell border color, default: 2E9AFE
-        borderColor: '#9E9E9E',               // Set Gantt border color, default: #9E9E9E
+        intervalColor: ['#FFFFFF','#F4F4F4'],   // Set alternating row background color, default: #FFFFFF,#F4F4F4
+        selectedRowColor: '#CAE1FF',            // Set selected row background color, default: #CAE1FF
+        selectedCellColor: '#2E9AFE',           // Set selected cell border color, default: 2E9AFE
+        borderColor: '#9E9E9E',                 // Set Gantt border color, default: #9E9E9E
 
         // Gantt bars
         barBorderRadius: 6,                     // Set Gantt bar border radius, default: 3px
         barBorderWeight: 1,                     // Set Gantt bar border weight, default: 1px
-        barBorderColor: '#9E0000',            // Set Gantt bar border color, default: #9E9E9E
+        barBorderColor: '#9E0000',              // Set Gantt bar border color, default: #9E9E9E
         barOpacity: 1,                          // Set Gantt bar opacity, default: 0.7
         barGridBorderWeight: 1,                 // Set Gantt bar background border weight, default: 1px
         resultBarStyle: 'mark',                 // Actual bar style (normal: do not mark dates outside plan, mark: mark dates outside plan; cust: custom segments)
@@ -170,12 +170,12 @@ MZGantt supports two usage methods: JS reference and npm installation.
 	    barDistanceAdj: 0,						// Distance adjustment between plan and actual progress bars (default 0px, no adjustment; larger value = closer. Can be negative)
 
         // Drag handle
-        dragHandlerBackColor: '#D8D8D8',      // Drag handle background color
+        dragHandlerBackColor: '#D8D8D8',        // Drag handle background color
 
         // lineExpandLen: 0,                    // Dependency line extension parameter
-        dependLineColor: '#228B22',           // Connection line color
-        dependLineMouseOverColor: '#FE9A2E',  // Connection line mouse hover color
-        criticalPathBGColor: '#FE9A2E',       // Critical path marker color
+        dependLineColor: '#228B22',             // Connection line color
+        dependLineMouseOverColor: '#FE9A2E',    // Connection line mouse hover color
+        criticalPathBGColor: '#FE9A2E',         // Critical path marker color
 
         // Width and height settings
         leftSideWidth: 300,                     // Set left panel width, default: 300px
@@ -210,15 +210,15 @@ MZGantt supports two usage methods: JS reference and npm installation.
         9. planBarColor        // (Optional) String          Gantt plan background (color value)
 
       II: The following data items can use custom names and must match the name in column definitions
-        10. name               // (Required) String        Name (can be task name, resource name, etc.)
-        11. iconColsVal        // (Optional) Array         Icon column (can be multiple icons separated by comma)
-        12. rsltStart          // (Optional) String Date   Actual start
-        13. rsltEnd            // (Optional) String Date   Actual end
-        14. rsltDur            // (Optional) Number        Actual workdays
-        15. resId              // (Optional) String        Resource/Responsible person
-        16. pctComp            // (Optional) Number        Completion (0 ~ 100 percentage)
-        17. seq                // (Optional) Decimal       Sort number
-        18. yourColName        // (Optional) String        Custom column value, key needs to match custom column name
+        10. name               // (Required) String          Name (can be task name, resource name, etc.)
+        11. iconColsVal        // (Optional) Array           Icon column (can be multiple icons separated by comma)
+        12. rsltStart          // (Optional) String Date     Actual start
+        13. rsltEnd            // (Optional) String Date     Actual end
+        14. rsltDur            // (Optional) Number          Actual workdays
+        15. resId              // (Optional) String          Resource/Responsible person
+        16. pctComp            // (Optional) Number          Completion (0 ~ 100 percentage)
+        17. seq                // (Optional) Decimal         Sort number
+        18. yourColName        // (Optional) String          Custom column value, key needs to match custom column name
     */
 
     // Gantt chart data
@@ -681,7 +681,7 @@ task.iconColsVal = [{"src": "./images/test.jpg","title": "",}];       // (Option
 task.resId = "01";                                                    // (Optional) Responsible person ID
 task.resName = "Andy Lau";                                            // (Optional) Responsible person name (optional)
 task.plan = [{"start": "2023-12-20","end": "2023-12-25","dur": 5}];   // (Optional) Plan data
-task.planBarColor = "#FF0000";                                      // (Optional) Progress bar color
+task.planBarColor = "#FF0000";                                        // (Optional) Progress bar color
 task.rsltStart = "2023-12-20";                                        // (Optional) Actual start
 task.rsltEnd = "2023-12-26";                                          // (Optional) Actual end
 task.pctComp = 90;                                                    // (Optional) Completion percentage
@@ -962,6 +962,7 @@ MZGantt provides 3 versions to meet different user needs.
 ## X. Contact
 
 Mobile: +31(0)623010866
+
 Email:
 - Service 1: info@ndes-global.com
 - Service 2: info@tecjt.com
